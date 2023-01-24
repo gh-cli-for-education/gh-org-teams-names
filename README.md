@@ -19,6 +19,9 @@ USAGE
 ```
 ➜  gh-org-teams-names git:(main) ✗ gh pwd
 ULL-MII-SYTWS-2223
+```
+
+```
 ➜  gh-org-teams-names git:(main) ✗ gh org-teams-names   
 ale_hernandez_liberon-alu0101225562
 casiano-rodriguez-leon-alumnoudv4
@@ -27,10 +30,16 @@ claudio_nestor-yanes-mesa-alu0101229942
 jordi-bas-balcells-alu100965315
 parallel-computing-group-parallel
 santiago-villar-vazquez-alu0100990522
+```
+  
+```
 ➜  gh-org-teams-names git:(main) ✗ gh org-teams-names -e 'cas|jor|par'
 ale_hernandez_liberon-alu0101225562
 claudio_nestor-yanes-mesa-alu0101229942
 santiago-villar-vazquez-alu0100990522
+```
+
+```
 ➜  gh-org-teams-names git:(main) ✗ gh org-teams-names -r 'cas|jor|par'
 casiano-rodriguez-leon-alumnoudv4
 casiano-rodriguez-leon-crguezl
