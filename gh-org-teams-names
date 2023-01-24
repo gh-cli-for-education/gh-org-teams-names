@@ -1,0 +1,45 @@
+#!/bin/bash
+set -e
+
+ORG=$(gh pwd)
+TEAMS=$(gh org-teams -o "$ORG")
+
+REGEXP='.'
+EXCLUDE='^$' # Exclude empty lines
+
+POSITIONAL_ARGS=()
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -o|--org)
+      ORG="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    -r|--regexp)
+      REGEXP="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    -e|--exclude)
+      EXCLUDE="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    -*|--*)
+      echo "USAGE"
+      echo "  gh team-names [-o|--org <orgname>] [-r|--regexp <regexp>] [-e|--exclude <regexp>]"
+      echo "  - Gives the names of the teams in the organization"
+      exit 1
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1") # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+echo $TEAMS | jq '.data.organization.teams.edges[].node.name' \
+   | grep -Ei ${REGEXP} \
+   | grep -Ei -v ${EXCLUDE} \
+   | tr -d '"' \
+   | tr 'áéíóúñ' 'aeyoun'
