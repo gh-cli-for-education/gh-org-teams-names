@@ -2,7 +2,6 @@
 set -e
 
 ORG=$(gh pwd)
-TEAMS=$(gh org-teams -o "$ORG")
 
 REGEXP='.'
 EXCLUDE='^$' # Exclude empty lines
@@ -38,6 +37,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+TEAMS=$(gh org-teams -o "$ORG")
 echo $TEAMS | jq '.data.organization.teams.edges[].node.name' \
    | grep -Ei ${REGEXP} \
    | grep -Ei -v ${EXCLUDE} \
